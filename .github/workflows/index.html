@@ -1,46 +1,168 @@
-# This workflow will build and push a node.js application to an Azure Web App when a release is created.
-#
-# This workflow assumes you have already created the target Azure App Service web app.
-# For instructions see https://docs.microsoft.com/azure/app-service/app-service-plan-manage#create-an-app-service-plan
-#
-# To configure this workflow:
-#
-# 1. Set up a secret in your repository named AZURE_WEBAPP_PUBLISH_PROFILE with the value of your Azure publish profile.
-#    For instructions on obtaining the publish profile see: https://docs.microsoft.com/azure/app-service/deploy-github-actions#configure-the-github-secret
-#
-# 2. Change the values for the AZURE_WEBAPP_NAME, AZURE_WEBAPP_PACKAGE_PATH and NODE_VERSION environment variables  (below).
-#
-# For more information on GitHub Actions for Azure, refer to https://github.com/Azure/Actions
-# For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
-on:
-  release:
-    types: [created]
+<!DOCTYPE html>
+<html>
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Fontdiner+Swanky|Caveat|Cookie' rel='stylesheet'>
+  <title>Slide Bar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
 
-env:
-  AZURE_WEBAPP_NAME: your-app-name    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
-  NODE_VERSION: '10.x'                # set this to the node version to use
 
-jobs:
-  build-and-deploy:
-    name: Build and Deploy
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ env.NODE_VERSION }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-    - name: npm install, build, and test
-      run: |
-        # Build and test the project, then
-        # deploy to Azure Web App.
-        npm install
-        npm run build --if-present
-        npm run test --if-present
-    - name: 'Deploy to Azure WebApp'
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+
+    body {
+      font-family: 'Cookie' , cursive;
+      background: linear-gradient(45deg,#B266FF,#B5ffFD,#a9696b);
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background-color: rgba(80,80,50,0.6);
+      z-index: 1;
+      transition: 0.6s;
+      overflow-x: hidden;
+      text-align: center;
+      padding-top: 60px;
+    }
+
+    .sidebar a {
+      color: #0ff;
+      font-size: 35;
+      text-transform: uppercase;
+      display: block;
+      padding: 20px 8px 8px 32px;
+      transition: 0.9s;
+      text-align: center;
+      text-decoration: none;
+    }
+    .sidebar a:before {
+      content: "";
+      height: 10px;
+      width: 60%;
+      background: red;
+    }
+    .sidebar a:hover {
+      transform: scale(1.2);
+      color: #ff0;
+      font-size: 30;
+      text-shadow: 2px 3px 10px #ff7;
+      background: #23b;
+      box-shadow: 1px 1px 1px 1px magenta;
+      border-radius: 20% 0;
+      transform: scale(1.2);
+    }
+
+    .sidebar .close {
+      position: absolute;
+      top: -30px;
+      color: #fff;
+      right: 20px;
+      margin-top: 20px;
+      margin-left: 40px;
+      font-size: 60px;
+      transition: 1s linear;
+    }
+    .sidebar .close:hover {
+      transform: rotate(360deg);
+      font-size: 90px;
+    }
+    .open {
+      font-size: 40px;
+      text-shadow: 2px 3px 4px #b7e;
+      color: #00d0bf;
+      corsur: pointer;
+      transition: all 2s linear;
+      margin: 20px;
+
+    }
+    .open:hover {}
+    mark {
+      box-shadow: inset 0 0 5px #33ffff,
+      inset 0 0 10px #66ffff;
+    }
+    #con,#conn {
+      height: 70px;
+      margin: auto;
+      width: 80%;
+      background: gold;
+      transition: all 1s linear;
+      overflow: hidden;
+      padding: 0;
+      text-align: center;
+      box-shadow: 2px 3px 4px 5px red;
+      text-shadow: 2px 2px 2px #ffbbdd;
+      margin-top: 30px;
+    }
+    #conn {
+      transition: all 4s linear;
+    }
+    #con:last-child {
+      width: 90%;
+    }
+
+    #con:hover {
+      height:50vh;
+    }
+    #conn:hover {
+      height: 250vh;
+     
+    }
+  </style>
+</head>
+<body>
+  <div id="sidenav" class="sidebar">
+    <span class="close" onClick="cls()">
+      &#9784;</span>
+    <a href="#">MATH[home]</a>
+    <a href="#">PHYSICS[MISSION]</a>
+    <a href="#">CHEMISTRY[DREAM]</a>
+    <a href="#">ENGLISH[ENEMY]</a>
+    <a href="#">COMPUTER[LOVE]</a>
+    <a href="#">BIO[ALIEN]</a>
+    <a href="#">HINDI[ERROR]</a>
+  </div>
+  <span class="open" onClick="opn()">&#9783; open</span>
+
+  <div id="con">
+    <h1>FORMULAS</h1>
+    <a href="/MATH/C2/index.html">CHAPTER 2</a>
+  </div>
+  <div id="con">
+    <h1>WHO WILL WIN?</h1>
+    <h3>Every Participent Is <mark>Winner</mark></h3><h2>Every Participant Who Have Confidence Is A Real Winner</h2>
+  </div>
+  <div id="con">
+    <h1>WHO WILL LOOSE?</h1>
+    <h3>No One <mark>Loose</mark> This Contest</h3><h2>They Learn More Then Before</h2>
+  </div>
+  <div id="con">
+    <h1>AM I WINNER?</h1>
+    <h3>No I <kbd>Am</kbd> Not Winner😅</h3><h2>Because I Take Help From Amardeep's Code<br><a>SLIDE BAR</a><br>But I didn't Copy It</h2>
+  </div>
+
+  <div id="con">
+    <h1>CONGRATULATIONS</h1>
+    <h2>ITS PARTY TIME</h2>
+    <h2>WINNER ARE THE BEST</h2>
+  </div>
+
+
+  <script>
+    function opn() {
+      document.getElementById("sidenav").style.width = "85%";
+
+    }
+    function cls() {
+      document.getElementById("sidenav").style.width = "0";
+
+    }
+
+  </script>
+</body>
+</html>
